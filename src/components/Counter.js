@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const Counter = ({ num, onIncrease, onDecrease }) => {
+const Counter = ({ onIncrease, onDecrease, num }) => {
+
+
     return(
         <div>
             <h1>{num}</h1>

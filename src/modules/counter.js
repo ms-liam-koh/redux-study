@@ -1,5 +1,5 @@
 import { createAction, handleActions } from "redux-actions";
-//액션명 생성
+
 const INCREASE = "counter/INCREASE";
 const DECREASE = "counter/DECREASE";
 
@@ -7,10 +7,21 @@ const DECREASE = "counter/DECREASE";
 export const increase = createAction(INCREASE);
 export const decrease = createAction(DECREASE);
 
-//초기 상태값
-const initialState = {
-  num: 0,
+//redux-thun=k 적용
+export const increaseAsync = () => (dispatch) => {
+  setTimeout(() => {
+    dispatch(increase());
+  }, 1000);
 };
+
+export const decreaseAsync = () => (dispatch) => {
+  setTimeout(() => {
+    dispatch(decrease());
+  }, 1000);
+};
+
+//초기 상태값
+const initialState = 0;
 
 //리듀서 함수 : 액션 발생 시 그에 맞는 로직 처리
 // function counter(state = initialState, action) {
@@ -22,8 +33,8 @@ const initialState = {
 // }
 const counter = handleActions(
   {
-    [INCREASE]: (state, action) => ({ number: state.number + 1 }), // handleAction 적용
-    [DECREASE]: (state, action) => ({ number: state.number - 1 }),
+    [INCREASE]: (state) => state + 1,
+    [DECREASE]: (state) => state - 1,
   },
   initialState
 );
