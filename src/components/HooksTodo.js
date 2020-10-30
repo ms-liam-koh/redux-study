@@ -36,6 +36,26 @@ const HooksTodo = () => {
             <hr></hr>
             <input type="text" onChange={onChange} value={val}></input>
             {val}
+            <HooksChild
+            name1={'myname1'}
+            name2={'myname2'}
+            name3={'myname3'}
+            >
+                <div>
+                    <h3>this is children</h3>
+                </div>
+            </HooksChild>
+        </div>
+    )
+}
+//props 전달
+const HooksChild = ({ name1, name2, name3, children }) => {
+    return (
+        <div>
+            <div>{name1}</div>
+            <div>{name2}</div>
+            <div>{name3}</div>
+            {children}
         </div>
     )
 }
