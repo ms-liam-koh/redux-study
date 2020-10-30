@@ -1,36 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { connect } from 'react-redux';
 import { changeInput, insert, toggle, remove } from '../../modules/mytodo';
-import myTodoReducer from '../../modules/todos';
-import todos from "../../modules/todos";
+import myTodoReducer from '../../modules/mytodo';
+import { isMetaProperty } from "typescript";
 
 const MyTodo = ({ changeInput, insert, toggle, remove, input, items }) => {
 
     const [val, setVal] = useState('val');
 
     useEffect(() => {
-        console.log(changeInput, insert, input, items);
-    }, [])
-
-
+        console.log(input, items);
+    }, [items])
 
     return (
         <div>
-         
+            input value :
+            <input type="text" value={input} onChange={changeInput}></input>
+            <button onClick={insert}>add</button>
+            <hr></hr>
+            <div>
+                {items.map((item) => {
+                    return (
+                        <div key={item.id}>
+                            <div>{item.id}</div>
+                            <div>{item.text}</div>
+                            <div>{item.done}</div>
+                            <button onClick={remove}>delete</button>
+                        </div>
+                    )
+                })}
+            </div>
         </div>
+
     )
 }
 
-const mapStateToProps = state => ({
-    items: state.items,
-    input: state.input
-});
 
 const mapDispatchToProps = dispatch => ({
-    changeInput: (input) => dispatch(input),
-    insert: (text) => dispatch(text),
-    toggle: (index) => dispatch(index),
-    remove: (index) => dispatch(index),
+    changeInput: (input) => dispatch(changeInput(input.target.value)),
+    insert: (text) => dispatch(insert(text)),
+    toggle: (index) => dispatch(toggle(index)),
+    remove: (index) => dispatch(remove(index)),
 });
-
-export default connect(mapStateToProps, mapDispatchToProps)(MyTodo);
+//mytodo : rootReducer에 넣은 이름으로 사용
+export default connect(({ mytodo }) => ({
+    items: mytodo.items,
+    input: mytodo.input
+}),mapDispatchToProps)(MyTodo);

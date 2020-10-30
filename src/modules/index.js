@@ -5,7 +5,7 @@ import mytodo from './mytodo';
 
 const rootReducer = combineReducers({
     counter, 
-    todos,
+    // todos,
     mytodo,
 })
 
