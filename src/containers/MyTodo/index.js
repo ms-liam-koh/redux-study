@@ -4,28 +4,46 @@ import { changeInput, insert, toggle, remove } from '../../modules/mytodo';
 import myTodoReducer from '../../modules/mytodo';
 import { isMetaProperty } from "typescript";
 
-const MyTodo = ({ changeInput, insert, toggle, remove, input, items }) => {
+const MyTodo = (props) => {
 
-    const [val, setVal] = useState('val');
+    const { changeInput, insert, toggle, remove, input, items } = props;
+
+    const [text, setText] = useState('');
 
     useEffect(() => {
         console.log(input, items);
     }, [items])
 
+    const onInsert = (text) => {
+        insert(text);
+    }
+
+    const onRemove = (index) => {
+        remove(index);
+    }
+
+    const onToggle = (index) => {
+        toggle(index)
+    }
+
     return (
         <div>
             input value :
             <input type="text" value={input} onChange={changeInput}></input>
-            <button onClick={insert}>add</button>
+            <button onClick={()=>onInsert(input)}>add</button>
             <hr></hr>
             <div>
                 {items.map((item) => {
                     return (
                         <div key={item.id}>
                             <div>{item.id}</div>
-                            <div>{item.text}</div>
+                            <div style={{textDecoration: item.done ? 'line-through' : 'none'}}>{item.text}</div>
                             <div>{item.done}</div>
-                            <button onClick={remove}>delete</button>
+                            <button onClick={()=>onRemove(item.id)}>delete</button>
+                            <input type="checkbox" 
+                            onClick={()=>onToggle(item.id)}
+                            
+                            ></input>
                         </div>
                     )
                 })}
@@ -46,4 +64,9 @@ const mapDispatchToProps = dispatch => ({
 export default connect(({ mytodo }) => ({
     items: mytodo.items,
     input: mytodo.input
-}),mapDispatchToProps)(MyTodo);
+}),{
+    changeInput,
+    insert,
+    toggle,
+    remove
+})(MyTodo);
