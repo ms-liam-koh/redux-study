@@ -4,12 +4,13 @@ import CounterContainer from './containers/CounterContainer';
 import './App.css';
 import TodosContainer from './containers/TodosContainer';
 import SampleContainer from './containers/SampleContainer';
-
+import HooksTodo from './components/HooksTodo';
 
 function App() {
   return (
     <div>
-      <SampleContainer></SampleContainer>
+      {/* <SampleContainer></SampleContainer> */}
+      <HooksTodo></HooksTodo>
       {/* <CounterContainer></CounterContainer> */}
       <hr></hr>
       {/* <TodosContainer></TodosContainer> */}
