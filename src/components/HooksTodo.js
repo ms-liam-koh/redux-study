@@ -9,6 +9,7 @@ const HooksTodo = () => {
     useEffect(() => {
         document.title = `${count} clicked`;
 
+
         //재렌더링 직전에 호출되는 cleanup 
         return function cleanup() {
             console.log('cleanup');
