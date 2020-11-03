@@ -10,8 +10,8 @@ function App() {
   return (
     <div>
       <SampleContainer></SampleContainer>
-      {/* <CounterContainer></CounterContainer> */}
       <hr></hr>
+      <CounterContainer></CounterContainer>
       {/* <TodosContainer></TodosContainer> */}
     </div>
   );
