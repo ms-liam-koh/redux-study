@@ -1,19 +1,15 @@
-import React from 'react';
 import logo from './logo.svg';
-import CounterContainer from './containers/CounterContainer';
 import './App.css';
-import TodosContainer from './containers/TodosContainer';
-import SampleContainer from './containers/SampleContainer';
-import Rendering from './containers/rendering/Rendering';
+import TodoList from './TodoList'
 
+// todo 리스트
+// redux부터 
+// 데이터모델정의
 
 function App() {
   return (
-    <div>
-      {/* <SampleContainer></SampleContainer>
-      <hr></hr>
-      <CounterContainer></CounterContainer> */}
-      <Rendering></Rendering>
+    <div className="App">
+      <TodoList></TodoList>
     </div>
   );
 }
