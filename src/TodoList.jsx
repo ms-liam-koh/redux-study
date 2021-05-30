@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {create, update, read, remove} from './redux/store'
 import { connect } from 'react-redux';
+import {todoLists} from './redux/selectors'
 
 const TodoList = ({ todoList, onCreate, onUpdate, onRemove }) => {
 
@@ -52,6 +53,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
     return {
+        todoLists: todoLists,
         onCreate: (newTodo) => dispatch(create(newTodo)),
         onUpdate: (newTodo) => dispatch(update(newTodo)),
         onRemove: (id) => dispatch(remove(id)),
