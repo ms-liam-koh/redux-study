@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import {create, update, read, remove} from './redux/store'
+import { create, update, read, remove } from './redux/store'
+import orm, { ormCreate, ormUpdate, ormRemove } from './redux/model'
 import { connect } from 'react-redux';
-import {todoLists} from './redux/selectors'
+import { todoLists } from './redux/selectors'
 
-const TodoList = ({ todoList, onCreate, onUpdate, onRemove }) => {
+const TodoList = ({ todoList, onCreate, onUpdate, onRemove, onOrmCreate }) => {
 
 
-    useEffect(()=>{
-        console.log(todoList);
-    },[])
+    useEffect(() => {
+        console.log('selector', todoLists);
+    }, [])
 
     return (
         <div>
@@ -21,7 +22,7 @@ const TodoList = ({ todoList, onCreate, onUpdate, onRemove }) => {
                     like: false,
                 })
             }}>create</button>
-            <button onClick={()=>{
+            <button onClick={() => {
                 onUpdate({
                     id: 1,
                     title: 'new title updated',
@@ -29,18 +30,17 @@ const TodoList = ({ todoList, onCreate, onUpdate, onRemove }) => {
                     like: false,
                 })
             }}>update</button>
-            <button onClick={()=>{
+            <button onClick={() => {
                 onRemove(1);
             }}>delete</button>
-            <hr></hr>
             {todoList.todoList.map((todo, index) => {
                 return (
-                    <div key={index} style={{'margin': '10px', 'border': '1px solid black'}}>
+                    <div key={index} style={{ 'margin': '10px', 'border': '1px solid black' }}>
                         <div>id: {todo.id}</div>
                         <div>title: {todo.title}</div>
                         <div>content: {todo.content}</div>
                         <div>like: {todo.like === true ? 'yes' : 'no'}</div>
-                    </div>    
+                    </div>
                 )
             })}
         </div>
@@ -48,15 +48,17 @@ const TodoList = ({ todoList, onCreate, onUpdate, onRemove }) => {
 }
 
 const mapStateToProps = state => ({
-    todoList: state
+    todoList: state,
+    todoLists: todoLists(),
+    
 })
 
 const mapDispatchToProps = dispatch => {
     return {
-        todoLists: todoLists,
         onCreate: (newTodo) => dispatch(create(newTodo)),
         onUpdate: (newTodo) => dispatch(update(newTodo)),
         onRemove: (id) => dispatch(remove(id)),
+        onOrmCreate: (newTodo) => dispatch(ormCreate(newTodo))
     }
 }
 

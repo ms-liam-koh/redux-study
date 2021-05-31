@@ -3,10 +3,14 @@ import { Model, many, ORM, attr } from 'redux-orm'
 
 
 //기존 redux
-const CREATE = 'ormtest/CREATE';
-const UPDATE = 'ormtest/UPDATE';
+export const CREATE = 'ormtest/CREATE';
+export const UPDATE = 'ormtest/UPDATE';
 const READ = 'ormtest/READ';
-const REMOVE = 'ormtest/REMOVE';
+export const REMOVE = 'ormtest/REMOVE';
+
+export const ORM_CREATE = 'ormtest/ORM_CREATE';
+export const ORM_UPDATE = 'ormtest/ORM_UPDATE';
+export const ORM_REMOVE = 'ormtest/ORM_REMOVE';
 
 export const create = createAction(CREATE);
 export const update = createAction(UPDATE);

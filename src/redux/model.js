@@ -1,22 +1,27 @@
-import { Schema, Model, many, fk, attr } from 'redux-orm';
+import { Schema, Model, many, fk, attr, ORM } from 'redux-orm';
+import { createAction, handleActions } from "redux-actions";
 import {
-    CREATE_TODO,
-    MARK_DONE,
-    DELETE_TODO,
-    ADD_TAG_TO_TODO,
-    REMOVE_TAG_FROM_TODO,
-} from './actionTypes';
+    ORM_CREATE,
+    ORM_UPDATE,
+    ORM_REMOVE
+} from './store';
+
+export const ormCreate = createAction(ORM_CREATE);
+export const ormUpdate = createAction(ORM_UPDATE);
+export const ormRemove = createAction(ORM_REMOVE);
+
 
 export class Todo extends Model {
     static reducer(state, action) {
+        console.log('###### state, action', state, action)
         switch (action.type) {
-            case CREATE:
+            case ORM_CREATE:
                 console.log(state, action.payload)
                 const newTodo = action.payload;
                 state.concat(newTodo);
                 Todo.create(newTodo);
                 break;
-            case UPDATE:
+            case ORM_UPDATE:
                 const newTodo2 = action.payload;
     
                 const value = state.map((todo, index) => {
@@ -29,7 +34,7 @@ export class Todo extends Model {
 
                 Todo.withId(newTodo2.id).update(newTodo2);
                 break;
-            case REMOVE:
+            case ORM_REMOVE:
                 console.log(state, action)
                 Todo.withId(newTodo2.id).delete();
                 // return state.filter(todo => {
@@ -51,13 +56,13 @@ Todo.fields =  {
 
 Todo.defaultProps = {
     id: 1,
-    title: 'title 1',
-    content: 'hello world 1',
+    title: 'title by orm',
+    content: 'hello world by orm',
     like: false,
 }
 
-export const schema = new Schema();
-schema.register(Todo);
+export const orm = new ORM();
+orm.register(Todo);
 
-export default schema;
+export default orm;
 
