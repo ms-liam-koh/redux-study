@@ -11,8 +11,8 @@ export const ormSelector = state => {
     //1개 삽입
     console.log('orm session', session.Todo.create({
         id: 1,
-        title: 'title 1',
-        content: 'hello world 1',
+        title: 'title by orm',
+        content: 'hello world by orm',
         like: false,
     }))
 
@@ -28,8 +28,8 @@ export const ormSelector = state => {
     return [
         {
             id: 1,
-            title: 'title 1',
-            content: 'hello world 1',
+            title: 'title by orm',
+            content: 'hello world by orm',
             like: false,
         }
     ];

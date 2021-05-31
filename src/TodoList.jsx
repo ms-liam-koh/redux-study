@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { create, update, read, remove } from './redux/store'
 import orm, { ormCreate, ormUpdate, ormRemove } from './redux/model'
 import { connect } from 'react-redux';
-import { todoLists } from './redux/selectors'
+import { todoLists } from './redux/selectors';
+import View from './board/View';
 
 const TodoList = ({ todoList, onCreate, onUpdate, onRemove, onOrmCreate }) => {
 
@@ -13,6 +14,7 @@ const TodoList = ({ todoList, onCreate, onUpdate, onRemove, onOrmCreate }) => {
 
     return (
         <div>
+            <View></View>
             <h1>redux orm todolist</h1>
             <button onClick={() => {
                 onCreate({

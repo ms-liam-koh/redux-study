@@ -20,8 +20,8 @@ export const remove = createAction(REMOVE);
 const initialState = [
     {
         id: 1,
-        title: 'title 1',
-        content: 'hello world 1',
+        title: 'title by orm1111',
+        content: 'hello world by orm',
         like: false,
     }
 ]

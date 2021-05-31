@@ -56,8 +56,8 @@ Todo.fields =  {
 
 Todo.defaultProps = {
     id: 1,
-    title: 'title by orm',
-    content: 'hello world by orm',
+    title: 'title by orm11',
+    content: 'hello world by orm11',
     like: false,
 }
 
