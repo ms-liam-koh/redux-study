@@ -14,6 +14,8 @@ const TodoList = ({ todoList, onCreate, onUpdate, onRemove, onOrmCreate }) => {
 
     return (
         <div>
+
+
             <h1>redux orm todolist</h1>
             <View></View>
             {/* <button onClick={() => {

@@ -3,6 +3,7 @@ import { createReducer, defaultUpdater, createSelector as ormCreateSelector } fr
 import { createSelector } from 'reselect';
 
 export function ormSelector(state) {
+    // state undefined
     return state.orm;
 };
 

@@ -10,18 +10,19 @@ import {
 } from './actionTypes';
 
 export class ClassModel extends Model {
-    static reducer(state, action) {
-        console.log('###### reducer-class', action)
-        console.log(action, state)
+    static reducer(action, _ClassModel, session) {
+        // console.log('###### reducer-class', action)
+        console.log(action, session)
         switch (action.type) {
             case CLASS_CREATE:
-                ClassModel.create(action.payload);
+                _ClassModel.create(action.payload);
                 break;
             case CLASS_UPDATE:
-                ClassModel.withId(action.payload.id).update(action.payload);
+                console.log('###ccreate res', action.payload);
+                _ClassModel.withId(action.payload.class_id).update(action.payload);
                 break;
             case CLASS_DELETE:
-                ClassModel.withId(action.payload.id).delete();
+                _ClassModel.withId(action.payload).delete();
                 break;
             default: break;
         }
@@ -29,17 +30,17 @@ export class ClassModel extends Model {
 }
 
 export class StudentModel extends Model {
-    static reducer(state, action) {
-        console.log('###### reducer-student', state, action)
+    static reducer(action, _StudentModel, session) {
+        // console.log('###### reducer-student', state, action)
         switch (action.type) {
             case STUDENT_CREATE:
-                StudentModel.create(action.payload);
+                _StudentModel.create(action.payload);
                 break;
             case STUDENT_UPDATE:
-                StudentModel.withId(action.payload.id).update(action.payload);
+                _StudentModel.withId(action.payload.student_id).update(action.payload);
                 break;
             case STUDENT_DELETE:
-                StudentModel.withId(action.payload.id).delete();
+                _StudentModel.withId(action.payload).delete();
                 break;
             default: break;
         }
@@ -78,5 +79,10 @@ const orm = new ORM({
     stateSelector: state => state.orm
 });
 orm.register(ClassModel, StudentModel);
+
+// const emptyDBState = orm.getEmptyState();//빈 db 상태
+// export const session = orm.session(emptyDBState);//session 활성화
+
+
 
 export default orm;
