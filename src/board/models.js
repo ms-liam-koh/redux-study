@@ -11,7 +11,7 @@ import {
 
 export class ClassModel extends Model {
     static reducer(state, action) {
-        // const _payload = action.paylaod131212
+        console.log('###### reducer-class', action)
         console.log(action, state)
         switch (action.type) {
             case CLASS_CREATE:
@@ -30,7 +30,7 @@ export class ClassModel extends Model {
 
 export class StudentModel extends Model {
     static reducer(state, action) {
-        // const _payload = action.paylaod
+        console.log('###### reducer-student', state, action)
         switch (action.type) {
             case STUDENT_CREATE:
                 StudentModel.create(action.payload);
@@ -48,18 +48,35 @@ export class StudentModel extends Model {
 
 ClassModel.modelName = 'ClassModel';
 ClassModel.fields = {
-    id: attr(),
+    class_id: attr(),
     name: attr(),
 }
 //교실 키 외래키로 지정
 StudentModel.modelName = 'StudentModel';
 StudentModel.fields = {
-    id: attr(),
+    student_id: attr(),
     name: attr(),
-    classId: fk({ to: 'ClassModel', as: 'classModel', relatedName: 'id' })
+    student_class_id: fk({
+        to: 'ClassModel', // 참조할 테이블
+        as: 'classModel', // 참조할 테이블 명칭
+        relatedName: 'student_class_id' //필드명이랑 겹치면 안됨
+    })
 }
 
-export const orm = new ORM();
+ClassModel.defaultProps = {
+    class_id: 0,
+    name: ''
+}
+
+StudentModel.defaultProps = {
+    student_id: 0,
+    name: '',
+    student_class_id: 0,
+}
+
+const orm = new ORM({
+    stateSelector: state => state.orm
+});
 orm.register(ClassModel, StudentModel);
 
 export default orm;

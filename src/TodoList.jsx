@@ -14,9 +14,9 @@ const TodoList = ({ todoList, onCreate, onUpdate, onRemove, onOrmCreate }) => {
 
     return (
         <div>
-            <View></View>
             <h1>redux orm todolist</h1>
-            <button onClick={() => {
+            <View></View>
+            {/* <button onClick={() => {
                 onCreate({
                     id: 1,
                     title: 'new title',
@@ -44,7 +44,7 @@ const TodoList = ({ todoList, onCreate, onUpdate, onRemove, onOrmCreate }) => {
                         <div>like: {todo.like === true ? 'yes' : 'no'}</div>
                     </div>
                 )
-            })}
+            })} */}
         </div>
     )
 }

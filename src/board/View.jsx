@@ -1,19 +1,36 @@
 import { useState, useEffect } from 'react';
 import { classCreate, classUpdate, classDelete, studentCreate, studentUpdate, studentDelete } from './actions';
 import { connect } from 'react-redux';
+import orm from './models';
+import { classListSelector, ormSelector } from './selectors';
 
-const View = ({ onClassCreate, classUpdate, classDelete, studentCreate, studentDelete, studentUpdate }) => {
+const View = ({ classCreate, classUpdate, classDelete, studentCreate, studentDelete, studentUpdate, classList }) => {
 
     useEffect(() => {
-        console.log(classCreate)
+        const emptyState = orm.getEmptyState();
+        const session = orm.session(emptyState);
+
+        session.ClassModel.create({
+            class_id: 1,
+            name: 'class1'
+        })
+
+        const res = session.ClassModel.all().toRefArray().map(elem => {
+            return {
+                ...elem
+            }
+        });
+
+        console.log('##### res', classList())
+
     }, [])
 
     return (
         <>
             <div>hello</div>
             <button onClick={() => {
-                onClassCreate({
-                    id: 1,
+                classCreate({
+                    class_id: 1,
                     name: 'class1'
                 })
             }}>student create</button>
@@ -29,18 +46,18 @@ const View = ({ onClassCreate, classUpdate, classDelete, studentCreate, studentD
 
 const mapStateToProps = state => {
     return {
-    orm: state
-}}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onClassCreate: (payload) => dispatch(classCreate(payload)),
-        classUpdate: (payload) => dispatch(classUpdate(payload)),
-        classDelete: (id) => dispatch(classDelete(id)),
-        studentCreate: (payload) => dispatch(studentCreate(payload)),
-        studentUpdate: (payload) => dispatch(studentUpdate(payload)),
-        studentDelete: (id) => dispatch(studentDelete(id)),
+        orm: state,
+        classList: classListSelector
     }
 }
+
+const mapDispatchToProps = dispatch => ({
+    classCreate: (payload) => dispatch(classCreate(payload)),
+    classUpdate: (payload) => dispatch(classUpdate(payload)),
+    classDelete: (id) => dispatch(classDelete(id)),
+    studentCreate: (payload) => dispatch(studentCreate(payload)),
+    studentUpdate: (payload) => dispatch(studentUpdate(payload)),
+    studentDelete: (id) => dispatch(studentDelete(id)),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(View);
