@@ -4,15 +4,16 @@ import CounterContainer from './containers/CounterContainer';
 import './App.css';
 import TodosContainer from './containers/TodosContainer';
 import SampleContainer from './containers/SampleContainer';
+import Rendering from './containers/rendering/Rendering';
 
 
 function App() {
   return (
     <div>
-      <SampleContainer></SampleContainer>
+      {/* <SampleContainer></SampleContainer>
       <hr></hr>
-      <CounterContainer></CounterContainer>
-      {/* <TodosContainer></TodosContainer> */}
+      <CounterContainer></CounterContainer> */}
+      <Rendering></Rendering>
     </div>
   );
 }
