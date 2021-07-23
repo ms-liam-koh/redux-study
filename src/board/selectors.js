@@ -1,15 +1,13 @@
-import orm from './models';
-import { createReducer, defaultUpdater, createSelector as ormCreateSelector } from 'redux-orm';
-import { createSelector } from 'reselect';
+import orm from "./models";
+import { createReducer, defaultUpdater, createSelector } from "redux-orm";
+import { ClassModel, StudentModel } from "./models";
 
-export function ormSelector(state) {
-    // state undefined
-    return state.orm;
-};
+//selector 안되는 문제 해결해야할듯
+export const classListSelector = createSelector(orm, (session) => {
+  
+  return []
+});
 
-export const classListSelector = createSelector(
-    ormSelector,
-    ormCreateSelector(orm, session => {
-        return session.ClassModel.all().toRefArray()
-    })
-)
+export const studentListSelector = createSelector(orm, (session) => {
+  return []
+});

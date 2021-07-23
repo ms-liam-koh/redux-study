@@ -7,11 +7,6 @@ import View from './board/View';
 
 const TodoList = ({ todoList, onCreate, onUpdate, onRemove, onOrmCreate }) => {
 
-
-    useEffect(() => {
-        console.log('selector', todoLists);
-    }, [])
-
     return (
         <div>
 
